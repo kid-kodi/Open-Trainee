@@ -1,0 +1,80 @@
+<!-- app/templates/admin/trainees/trainees.html -->
+
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Trainees{% endblock %}
+{% block body %}
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        <h1 style="text-align:center;">Trainees</h1>
+        {% if list %}
+          <button class="printBtn">Get as PDF</button>
+          <div class="btn-group nav navbar-nav navbar-right" role="group" aria-label="...">
+              <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Import data</a>
+              <a type="button" class="btn btn-default" href="{{ url_for('trainee.export_out') }}">Export data</a>
+          </div>
+          <hr class="intro-divider">
+          <div class="center">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th width=""></th>
+                  <th width="15%"> Image </th>
+                  <th width="15%"> First name </th>
+                  <th width="15%"> Last name </th>
+                  <th width="15%"> Email </th>
+                  <th width="15%"> Phone </th>
+                  <th width="15%"> Edit </th>
+                  <th width="15%"> Delete </th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for item in list %}
+                <tr>
+                  <td> <input type="checkbox" name="items" value="{{ item.id }}"> </td>
+                  <td>
+                    {% if item.image_url %}
+                      <img src="{{item.image_url}}" style="width: 40px; height: 40px">
+                    {% endif %}
+                  </td>
+                  <td> {{ item.first_name }} </td>
+                  <td> {{ item.last_name }} </td>
+                  <td> {{ item.email }} </td>
+                  <td> {{ item.phone }} </td>
+                  <td>
+                    <a href="{{ url_for('trainee.edit', id=item.id) }}">
+                      <i class="fa fa-pencil"></i> Edit 
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{ url_for('trainee.delete', id=item.id) }}">
+                      <i class="fa fa-trash"></i> Delete 
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div style="text-align: center">
+        {% else %}
+          <div style="text-align: center">
+            <h3> No data have been added. </h3>
+            <hr class="intro-divider">
+            <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Import data</a>
+        {% endif %}
+          <a href="{{ url_for('trainee.add') }}" class="btn btn-default btn-lg">
+            <i class="fa fa-plus"></i>
+            Add Trainee
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
