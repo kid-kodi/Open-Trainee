@@ -5,27 +5,63 @@ from flask import abort, flash, request, redirect, render_template, url_for, jso
 from flask_login import current_user, login_required
 
 from . import trainee
-from .forms import TraineeForm
+from .forms import TraineeForm, SearchForm
 from .. import db, images
-from ..models import Trainee, Level, Spinneret, Unit
+from ..models import Trainee, Level, Spinneret, Unit, User
 
 import flask_excel as excel
+from datetime import datetime
+from flask_weasyprint import HTML, render_pdf
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-# Trainee Views
+from sqlalchemy.sql.expression import and_
 
+
+def get_query(table, lookups, form_data):
+    conditions = [
+        getattr(table, field_name) == form_data[field_name]
+        for field_name in lookups if form_data[field_name]
+    ]
+
+    return table.query.filter(and_(*conditions))
+
+#routes order
 @trainee.route('/trainees', methods=['GET', 'POST'])
 @login_required
 def list():
-    """
-    List all trainees
-    """
+    page = request.args.get('page', 1, type=int)
+    form = SearchForm()
+    #form.unit_id.choices = [(c.id, c.name) for c in Unit.query.all()]
+    form.unit_id.choices.append((0,'All unit'))
+    for unit in Unit.query.all():
+        form.unit_id.choices.append((unit.id, unit.name))
 
-    list = Trainee.query.all()
+    if form.validate_on_submit():
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        unit_id = form.unit_id.data
+        print(type(unit_id))
+        print(unit_id!=0)
+        query = Trainee.query
+        if first_name:
+            query = query.filter(Trainee.first_name == first_name)
+        elif last_name:
+            query = query.filter(Trainee.last_name == last_name)
+        elif unit_id > 0:
+            query = query.filter(Trainee.unit_id == unit_id)
 
-    return render_template('trainee/list.html',
-                           list=list, title="Trainees")
+        pagination = query.order_by(Trainee.created_at.desc()).paginate(
+            page, per_page=25,
+            error_out=False)
+    else:
+        pagination = Trainee.query.order_by(Trainee.created_at.desc()).paginate(
+            page, per_page=25,
+            error_out=False)
+
+    _list = pagination.items
+    return render_template('trainee/list.html', list=_list, form=form, pagination=pagination)
+
 
 @trainee.route('/trainees/add', methods=['GET', 'POST'])
 @login_required
@@ -101,7 +137,7 @@ def edit(id):
             url = images.url(filename)
             trainee.image_filename = filename
             trainee.image_url = url
-        
+
         trainee.school = form.school.data
         trainee.level_id = form.level_id.data
         trainee.spinneret_id = form.spinneret_id.data
@@ -165,7 +201,7 @@ def import_in():
             c.theme = row['theme']
 
             print( row )
-            
+
             #c.created_at = datetime.utcnow()
             #c.created_by = current_user.id
             return c
@@ -194,12 +230,23 @@ def download():
                     'school', 'email', 'phone', 'theme']],
                                           "xls", file_name="trainee_samples")
 
-
-@trainee.route('/trainees/print', methods=['GET', 'POST'])
+@trainee.route('/trainee/print', methods=['GET', 'POST'])
 @login_required
-def process():
-    if request.method == 'POST':
-        tmp3 = request.form.getlist('trainees[]')
-        print(len(tmp3))
-        redirect(url_for('trainee.list'))
-    return redirect(url_for('trainee.list'))
+def print_to():
+    data = request.get_json()
+    ids = data['items']
+    print( data['items'] )
+    trainees = Trainee.query.filter(Trainee.id.in_(ids)).all()
+    for value in trainees:
+        print( value)
+    # Make a PDF straight from HTML in a string.
+    return jsonify({ 'trainees': [trainee.to_json() for trainee in trainees] })
+
+
+@trainee.route('/trainee/pdf', methods=['GET', 'POST'])
+@login_required
+def pdf():
+    name = 'kone'
+    # Make a PDF straight from HTML in a string.
+    html = render_template('trainee/pdf.html', name=name)
+    return render_pdf(HTML(string=html))

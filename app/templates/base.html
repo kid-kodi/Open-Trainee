@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{ title }} | Project Dream Team</title>
+    <title>{{ title }} | Open-Trainee</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
@@ -9,10 +9,12 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery-ui.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/print.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my-badge.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/invoice.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+    <nav class="navbar navbar-default topnav" role="navigation">
         <div class="container topnav">
           <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -21,22 +23,68 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand topnav" href="{{ url_for('home.dashboard') }}">Project Dream Team</a>
+              <a class="navbar-brand topnav" href="{{ url_for('home.dashboard') }}">Open-Trainee</a>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              {% if g.search_form %}
+                <form class="navbar-form navbar-left" method="get" action="{{ url_for('home.search') }}">
+                    <div class="form-group">
+                        {{ g.search_form.q(size=20, class='form-control', placeholder=g.search_form.q.label.text) }}
+                    </div>
+                </form>
+              {% endif %}
+              <ul class="nav navbar-nav">
+                  <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
+                  <li><a href="{{ url_for('trainee.list') }}">Trainees</a></li>
+                  <!-- Split button -->
+                  <li role="presentation" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-plus"></i>
+                      <span class="caret"></span> </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ url_for('trainee.add') }}">Nouveau stagiaire</a></li>
+                      <li><a href="{{ url_for('trainee.export_out') }}">Exporter la liste des stagiaire</a></li>
+                      <li><a href="{{ url_for('trainee.import_in') }}">Importer une liste de staigaire</a></li>
+                    </ul>
+                  </li>
+              </ul>
               <ul class="nav navbar-nav navbar-right">
                   {% if current_user.is_authenticated %}
-                      <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
-                      <li><a href="{{ url_for('department.list') }}">Departments</a></li>
-                      <li><a href="{{ url_for('unit.list') }}">Units</a></li>
-                      <li><a href="{{ url_for('trainee.list') }}">Trainees</a></li>
-                      <li><a href="{{ url_for('role.list') }}">Roles</a></li>
-                      <li><a href="{{ url_for('user.list') }}">users</a></li>
-                      <li><a href="{{ url_for('level.list') }}">levels</a></li>
-                      <li><a href="{{ url_for('spinneret.list') }}">spinnerets</a></li>
+                      <li>
+                        <a href="{{ url_for('trainee.list') }}">
+                          <i class="fa fa-bell"></i>
+                        </a>
+                      </li>
+                      <li role="presentation" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                          <i class="fa fa-cog"></i>
+                          <span class="caret"></span> </a>
+                        <ul class="dropdown-menu">
+                          <li><a href="{{ url_for('department.list') }}">Departments</a></li>
+                          <li><a href="{{ url_for('unit.list') }}">Units</a></li>
+                          <li><a href="{{ url_for('role.list') }}">Roles</a></li>
+                          <li><a href="{{ url_for('user.list') }}">users</a></li>
+                          <li><a href="{{ url_for('level.list') }}">levels</a></li>
+                          <li><a href="{{ url_for('spinneret.list') }}">spinnerets</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li><a href="{{ url_for('home.setup') }}">Configuration</a></li>
+                        </ul>
+                      </li>
+                      <li role="presentation" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                          <i class="fa fa-user"></i>
+                          <span class="caret"></span> </a>
+                        <ul class="dropdown-menu">
+                          <li class="dropdown-header">{{ current_user.username }}</li>
+                          <li><a href="#">Mon profile</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li><a href="#">Help</a></li>
+                          <li><a href="#">Setting</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                        </ul>
+                      </li>
 
-                    <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-                    <li><a><i class="fa fa-user"></i>  Hi, {{ current_user.username }}!</a></li>
                   {% else %}
                     <li><a href="{{ url_for('auth.register') }}">Register</a></li>
                     <li><a href="{{ url_for('auth.login') }}">Login</a></li>
@@ -45,10 +93,9 @@
           </div>
         </div>
     </nav>
-    <div class="wrapper">
+    <div class="container">
       {% block body %}
       {% endblock %}
-      <div class="push"></div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

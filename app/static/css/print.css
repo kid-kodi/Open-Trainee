@@ -1,7 +1,16 @@
-body { font: 2em Fontin, serif }
-nav { font-size: .7em }
+#printableArea{
+    display: none;
+}
 
-@page { size: A5; margin: 1cm }
+@page {
+  size: A5; margin: 1cm }
 @media print {
-    nav { display: none }
+  #printableArea{
+      display: block;
+  }
+
+  .header{
+    display: flex;
+    align-items: center;
+  }
 }

@@ -6,6 +6,12 @@ from wtforms import StringField, SubmitField, SelectField, HiddenField
 from wtforms.validators import DataRequired, Email
 from app import images
 
+class SearchForm(FlaskForm):
+    first_name = StringField('first name')
+    last_name = StringField('last name')
+    unit_id = SelectField('Search unit', choices=[], coerce=int)
+    submit = SubmitField('Search')
+
 class TraineeForm(FlaskForm):
     """
     Form for departement to add or edit a trainee

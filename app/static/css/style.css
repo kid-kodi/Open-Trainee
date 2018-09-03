@@ -8,14 +8,6 @@ body, h1, h2, h3 {
     font-weight: 700;
 }
 
-a, .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
-  color: #aec251;
-}
-
-a:hover, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover {
-  color: #687430;
-}
-
 footer {
     padding: 50px 0;
     background-color: #f8f8f8;
@@ -46,11 +38,6 @@ p.copyright {
     margin: auto;
     width: 50%;
     padding: 10px;
-}
-
-.content-section {
-    padding: 50px 0;
-    border-top: 1px solid #e7e7e7;
 }
 
 .footer, .push {
@@ -110,7 +97,6 @@ p.copyright {
 
 .outer {
     display: table;
-    position: absolute;
     height: 70%;
     width: 100%;
 }
@@ -121,6 +107,7 @@ p.copyright {
 }
 
 .inner {
+    padding: 70px;
     margin-left: auto;
     margin-right: auto;
 }

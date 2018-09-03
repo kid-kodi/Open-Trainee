@@ -158,15 +158,37 @@ $(function() {
 
       alert(items);
 
-      $.post("/trainees/print",
-        {"items":items},
-        function(data,status){
-            var tmp = data;            
-            console.log(data);
-            console.log(status);
-        }); 
+      $.ajax({
+          url: "/trainee/print",
+          type: "POST",
+          data: JSON.stringify({"items":items}),
+          contentType: "application/json; charset=utf-8",
+          success: function(dat) {
+            console.log(dat);
+          }
+      });
+
+      // $.post("/trainee/print",
+      //   {"items":items},
+      //   function(data,status){
+      //       var tmp = data;
+      //       console.log(data);
+      //       console.log(status);
+      //   });
 
       return false;
+    };
+
+    var printDiv = function() {
+         var divName = 'printableArea';
+         var printContents = document.getElementById(divName).innerHTML;
+         var originalContents = document.body.innerHTML;
+
+         document.body.innerHTML = printContents;
+
+         window.print();
+
+         document.body.innerHTML = originalContents;
     }
 
 
@@ -175,6 +197,7 @@ $(function() {
     $( ".itemBox" ).combobox({ select: onItemChange });
 
     $('body').on('click', '.printBtn', onDataPrint);
+    $('body').on('click', '.printDiv', printDiv);
 
     $( ".datepicker" ).datepicker();
 
