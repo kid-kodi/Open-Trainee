@@ -1,10 +1,23 @@
 from flask import request
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, SelectField
-from wtforms.validators import ValidationError, DataRequired, Length
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from wtforms import StringField, SubmitField, TextAreaField, PasswordField, SelectField
+from wtforms.validators import ValidationError, DataRequired, Length, EqualTo
 from flask_babel import _, lazy_gettext as _l
 from app.models import User
+from app import images
 
+class ChangePasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[
+                                        DataRequired(),
+                                        EqualTo('confirm_password')
+                                        ])
+    confirm_password = PasswordField('Confirm Password')
+    submit = SubmitField('Change')
+
+class ChangeAvatarForm(FlaskForm):
+    image = FileField('Image', validators=[FileAllowed(images, 'Images only')])
+    submit = SubmitField('Submit')
 
 class EditProfileForm(FlaskForm):
     username = StringField(_l('Username'), validators=[DataRequired()])

@@ -70,6 +70,7 @@ class User(UserMixin, db.Model):
     trainees = db.relationship('Trainee', backref='owner')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    avatar = db.Column(db.String, default=None, nullable=True)
     @property
     def password(self):
         """

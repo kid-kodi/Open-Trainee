@@ -9,7 +9,7 @@ from flask_babel import _, get_locale
 from app import db
 from . import home
 from ..models import User, Trainee, Unit, Department, Level, Spinneret
-from .forms import EditProfileForm, SearchForm
+from .forms import EditProfileForm, ChangePasswordForm, SearchForm, ChangeAvatarForm
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -53,6 +53,44 @@ def edit_profile():
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title=_('Edit Profile'),
                            form=form)
+
+@home.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        current_user.password = form.password.data
+        db.session.commit()
+        flash(_('Your changes have been saved.'))
+        return redirect(url_for('home.user', username=current_user.username))
+    return render_template('change_password.html', title=_('Change Password'),
+                           form=form)
+
+
+@home.route('/change_avatar', methods=['GET', 'POST'])
+@login_required
+def change_avatar():
+    form = ChangeAvatarForm()
+    if form.validate_on_submit():
+        if 'image' in request.files:
+            filename = images.save(request.files['image'])
+            url = images.url(filename)
+            print('file exist')
+        else:
+            print('file do not exist')
+            filename = 'default.png'
+            url = os.path.join( basedir, '/static/img/default.png')
+
+        current_user.avatar = url
+        db.session.commit()
+        flash('You have successfully modifiy your avatar')
+        return redirect(url_for('trainee.list'))
+
+    # load trainee template
+    return render_template('change_avatar.html',
+                           form=form,
+                           title="Add Trainee")
+
 
 @home.route("/setup", methods=['GET', 'POST'])
 @login_required

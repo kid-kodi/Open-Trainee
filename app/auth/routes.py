@@ -1,5 +1,5 @@
 # app/auth/views.py
-
+import os
 from flask import flash, redirect, render_template, url_for
 from flask_login import login_required, login_user, logout_user
 
@@ -16,11 +16,12 @@ def register():
     """
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data,
-                            username=form.username.data,
-                            first_name=form.first_name.data,
-                            last_name=form.last_name.data,
-                            password=form.password.data)
+        user = User(avatar=os.path.join( basedir, '/static/img/default.png'),
+            email=form.email.data,
+            username=form.username.data,
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            password=form.password.data)
 
         # add user to the database
         db.session.add(user)
