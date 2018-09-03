@@ -97,31 +97,38 @@
     </div>
   </div>
 </div>
-<div id="printableArea">
+<div id="printableArea" class="container">
+  <div class="row">
   {% for item in list %}
-    <div class="my-badge panel panel-default">
-      <div class="header row">
-        <div class="col-md-6">
+  <div class="col-md-3">
+    <div class="trainee-card">
+      <div class="trainee-card-head">
+        <div class="trainee-card-head-logo">
           <img src="" style="width: 40px; height: 30px">
           <p style="height: 10px">STAGIAIRE</p>
         </div>
-        <div class="col-md-6">
+        <div class="trainee-card-head-avtr">
           <img src="{{item.image_url}}" style="width: 40px; height: 40px">
         </div>
       </div>
-      <div class="panel-body">
+      <div class="trainee-card-body">
+        <b class="reg_number">{{ item.resgistration_number }}</b>
+        <h3 class="full_name">{{ item.first_name + ' ' + item.last_name }}</h3>
         <ul>
-          <li>{{ item.resgistration_num }}</li>
-          <li>{{ item.first_name + ' ' + item.last_name }}</li>
-          <li>{{ item.unit.name }}</li>
-          <li>{{ item.level.name }}</li>
-          <li>{{ item.school }}</li>
-          <li>{{ item.responsable }}</li>
-          <li>{{ item.ended_date }}</li>
+          <li>Departement : <b>{{ item.unit.department.name }}</b></li>
+          <li>Unité : <b>{{ item.unit.name }}</b></li>
+          <li>Niveau d'étude : <b>{{ item.level.name }}</b></li>
+          <li>Etabl. d'origine : <b>{{ item.school }}</b></li>
+          <li>Tuteur : <b>{{ item.responsable }}</b></li>
         </ul>
       </div>
+      <div class="trainee-card-footer">
+        <em>Valable jusqu'au {{ item.ended_date }}</em>
+      </div>
     </div>
+  </div>
   {% endfor %}
+  </div>
 </div>
 {% else %}
   <div class="outer">

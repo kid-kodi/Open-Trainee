@@ -3,32 +3,22 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block body %}
-<div class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="intro-message">
-                    <h1>Project Dream Team</h1>
-                    <h3>The best company in the world!</h3>
-                    <hr class="intro-divider">
-                    </ul>
-                </div>
+  <div class="row">
+      <div class="col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-body text-center">
+              <p>NOMBRE D'UTILISATEUR</p>
+              <h3>{{user|length}}</h3>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div>
-                    <p>NOMBRE D'UTILISATEUR</p>
-                    <h3>{{user|length}}</h3>
-                </div>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-body text-center">
+              <p>NOMBRE DE STAGIAIRE</p>
+              <h3>{{trainee|length}}</h3>
             </div>
-            <div class="col-6">
-                <div>
-                    <p>NOMBRE DE STAGIAIRE</p>
-                    <h3>{{trainee|length}}</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+          </div>
+      </div>
+  </div>
 {% endblock %}

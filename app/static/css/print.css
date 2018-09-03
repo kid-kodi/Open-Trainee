@@ -1,16 +1,58 @@
-#printableArea{
-    display: none;
+@page {
+  size: A4; margin: 1cm
 }
 
-@page {
-  size: A5; margin: 1cm }
 @media print {
   #printableArea{
-      display: block;
+      display: flex;
+      align-items: column;
+      align-items: center;
   }
 
-  .header{
+  .trainee-card{
+    width: 33%;
+    float: left;
+    padding: 10px 5px;
+  }
+
+  .trainee-card-head{
     display: flex;
+    /* flex-direction: column; */
     align-items: center;
+    justify-content: space-between;
+  }
+
+  .trainee-card-head-logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 50px;
+  }
+
+  .trainee-card-head-avtr{
+    width: 50%;
+  }
+
+  .trainee-card-body ul li{
+    list-style: none;
+  }
+
+  .trainee-card-body .reg_number{
+    color : blue;
+  }
+
+  .trainee-card-body .full_name{
+    text-align: center;
+  }
+
+  .trainee-card-body ul{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .trainee-card-footer em{
+    text-align: center;
+    color: red;
   }
 }
