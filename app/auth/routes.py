@@ -1,6 +1,6 @@
 # app/auth/views.py
 import os
-from flask import flash, redirect, render_template, url_for
+from flask import flash, redirect, render_template, url_for, current_app
 from flask_login import login_required, login_user, logout_user
 
 from . import auth
@@ -16,7 +16,7 @@ def register():
     """
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(avatar=os.path.join( basedir, '/static/img/default.png'),
+        user = User(avatar=os.path.join( current_app.config['UPLOADS_DEFAULT_DEST'], 'default.png' ),
             email=form.email.data,
             username=form.username.data,
             first_name=form.first_name.data,
