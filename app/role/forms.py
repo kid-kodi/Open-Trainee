@@ -8,6 +8,6 @@ class RoleForm(FlaskForm):
     """
     Form for departement to add or edit a role
     """
-    name = StringField('Name', validators=[DataRequired()])
+    name = StringField('Nom', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Sauver')

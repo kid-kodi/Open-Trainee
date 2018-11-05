@@ -23,7 +23,9 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand topnav" href="{{ url_for('home.dashboard') }}">Open-Trainee</a>
+                  <a class="navbar-brand topnav" href="{{ url_for('home.dashboard') }}">
+                   <img class="logo" alt="Brand" src="{{ url_for('static', filename = 'img/logo.png') }}">
+                 </a>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               {% if g.search_form %}
@@ -34,8 +36,8 @@
                 </form>
               {% endif %}
               <ul class="nav navbar-nav">
-                  <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
-                  <li><a href="{{ url_for('trainee.list') }}">Trainees</a></li>
+                  <li><a href="{{ url_for('home.dashboard') }}">Tableau de bord</a></li>
+                  <li><a href="{{ url_for('trainee.list') }}">Stagiaires</a></li>
                   <!-- Split button -->
                   <li role="presentation" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -43,8 +45,8 @@
                       <span class="caret"></span> </a>
                     <ul class="dropdown-menu">
                       <li><a href="{{ url_for('trainee.add') }}">Nouveau stagiaire</a></li>
-                      <li><a href="{{ url_for('trainee.export_out') }}">Exporter la liste des stagiaire</a></li>
-                      <li><a href="{{ url_for('trainee.import_in') }}">Importer une liste de staigaire</a></li>
+                      <li><a href="{{ url_for('trainee.export_out') }}">Exporter la liste des stagiaires</a></li>
+                      <li><a href="{{ url_for('trainee.import_in') }}">Importer la liste des stagaires</a></li>
                     </ul>
                   </li>
               </ul>
@@ -60,12 +62,12 @@
                           <i class="fa fa-cog"></i>
                           <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
-                          <li><a href="{{ url_for('department.list') }}">Departments</a></li>
-                          <li><a href="{{ url_for('unit.list') }}">Units</a></li>
+                          <li><a href="{{ url_for('department.list') }}">Departements</a></li>
+                          <li><a href="{{ url_for('unit.list') }}">Unités</a></li>
                           <li><a href="{{ url_for('role.list') }}">Roles</a></li>
-                          <li><a href="{{ url_for('user.list') }}">users</a></li>
-                          <li><a href="{{ url_for('level.list') }}">levels</a></li>
-                          <li><a href="{{ url_for('spinneret.list') }}">spinnerets</a></li>
+                          <li><a href="{{ url_for('user.list') }}">utilisateurs</a></li>
+                          <li><a href="{{ url_for('level.list') }}">niveaux</a></li>
+                          <li><a href="{{ url_for('spinneret.list') }}">filières</a></li>
                           <li role="separator" class="divider"></li>
                           <li><a href="{{ url_for('home.setup') }}">Configuration</a></li>
                         </ul>
@@ -78,16 +80,16 @@
                           <li class="dropdown-header">{{ current_user.username }}</li>
                           <li><a href="{{ url_for('home.user', username=current_user.username) }}">Mon profile</a></li>
                           <li role="separator" class="divider"></li>
-                          <li><a href="#">Help</a></li>
-                          <li><a href="#">Setting</a></li>
+                          <li><a href="#">Aidez-moi</a></li>
+                          <li><a href="#">Réglage</a></li>
                           <li role="separator" class="divider"></li>
-                          <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                          <li><a href="{{ url_for('auth.logout') }}">Déconnectez</a></li>
                         </ul>
                       </li>
 
                   {% else %}
-                    <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-                    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                    <li><a href="{{ url_for('auth.register') }}">S'enrégistrer</a></li>
+                    <li><a href="{{ url_for('auth.login') }}">S'identifier</a></li>
                   {% endif %}
               </ul>
           </div>

@@ -9,22 +9,22 @@
 {% if list %}
 <div>
   <div class="page-header">
-    <h1>Trainees</h1>
+    <h1>Stagiaire</h1>
     <div class="">
       <a href="{{ url_for('trainee.add') }}" class="btn btn-success">
-        Add Trainee
+        Ajouter stagiaire
       </a>
     </div>
   </div>
 
   <div class="actions-bar">
     <div class="btn-group" role="group" aria-label="...">
-        <a class="btn btn-default printDiv" href="#">Print</a>
+        <a class="btn btn-default printDiv" href="#">Impression</a>
         <a class="btn btn-default printBtn" href="#">PDF</a>
     </div>
     <div class="btn-group" role="group" aria-label="...">
-        <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Import data</a>
-        <a type="button" class="btn btn-default" href="{{ url_for('trainee.export_out') }}">Export data</a>
+        <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Importer des données</a>
+        <a type="button" class="btn btn-default" href="{{ url_for('trainee.export_out') }}">Exporter des données</a>
     </div>
   </div>
   <div class="">
@@ -33,8 +33,8 @@
           <tr>
             <th width=""></th>
             <th width="15%"> Image </th>
-            <th width="15%"> First name </th>
-            <th width="15%"> Last name </th>
+            <th width="15%"> Nom </th>
+            <th width="15%"> Prénom </th>
             <th width="15%"> Unité </th>
             <th width="15%"> Niveau </th>
             <th width="15%"> Actions </th>
@@ -62,12 +62,12 @@
                 <ul class="dropdown-menu">
                   <li>
                     <a href="{{ url_for('trainee.edit', id=item.id) }}">
-                      <i class="fa fa-pencil"></i> Edit
+                      <i class="fa fa-pencil"></i> Modifier
                     </a>
                   </li>
                   <li>
                     <a href="{{ url_for('trainee.delete', id=item.id) }}">
-                      <i class="fa fa-trash"></i> Delete
+                      <i class="fa fa-trash"></i> Supprimer
                     </a>
                   </li>
                 </ul>
@@ -113,13 +113,13 @@
   <div class="outer">
     <div class="middle">
       <div class="inner">
-        <h1 style="text-align:center;">Trainees</h1>
+        <h1 style="text-align:center;">Stagiaires</h1>
         <div style="text-align: center">
-          <h3> No data have been added. </h3>
+          <h3> Aucune donnée n'a été ajoutée. </h3>
           <a href="{{ url_for('trainee.add') }}" class="btn btn-success">
-            Add Trainee
+            Ajouter stagiaire
           </a>
-          <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Import data</a>
+          <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Importer données</a>
         </div>
       </div>
     </div>

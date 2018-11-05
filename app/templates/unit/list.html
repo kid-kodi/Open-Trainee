@@ -11,17 +11,17 @@
         <br/>
         {{ utils.flashed_messages() }}
         <br/>
-        <h1 style="text-align:center;">Units</h1>
+        <h1 style="text-align:center;">Unités</h1>
         {% if list %}
           <hr class="intro-divider">
           <div class="center">
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th width="15%"> Name </th>
+                  <th width="15%"> Nom </th>
                   <th width="40%"> Description </th>
-                  <th width="15%"> Edit </th>
-                  <th width="15%"> Delete </th>
+                  <th width="15%"> Modifier </th>
+                  <th width="15%"> Effacer </th>
                 </tr>
               </thead>
               <tbody>
@@ -31,12 +31,12 @@
                   <td> {{ item.description }} </td>
                   <td>
                     <a href="{{ url_for('unit.edit', id=item.id) }}">
-                      <i class="fa fa-pencil"></i> Edit 
+                      <i class="fa fa-pencil"></i> Modifier 
                     </a>
                   </td>
                   <td>
                     <a href="{{ url_for('unit.delete', id=item.id) }}">
-                      <i class="fa fa-trash"></i> Delete 
+                      <i class="fa fa-trash"></i> supprimer 
                     </a>
                   </td>
                 </tr>
@@ -47,12 +47,12 @@
           <div style="text-align: center">
         {% else %}
           <div style="text-align: center">
-            <h3> No data have been added. </h3>
+            <h3> Auccun . </h3>
             <hr class="intro-divider">
         {% endif %}
           <a href="{{ url_for('unit.add') }}" class="btn btn-default btn-lg">
             <i class="fa fa-plus"></i>
-            Add Unit
+            Ajouter Unité
           </a>
         </div>
       </div>

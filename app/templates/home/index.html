@@ -5,14 +5,14 @@
 {% block body %}
   <div class="row">
     <div class="col-md-12">
-        <h1>Hi, {{ current_user.username }}!</h1>
+        <h1>Salut, {{ current_user.username }}!</h1>
     </div>
   </div>
   <div class="row">
       <div class="col-md-3">
           <div class="panel panel-default">
             <div class="panel-body text-center">
-              <p>NOMBRE D'UTILISATEUR</p>
+              <p>NOMBRES D'UTILISATEURS</p>
               <h3>{{user|length}}</h3>
             </div>
           </div>
@@ -20,7 +20,7 @@
       <div class="col-md-3">
           <div class="panel panel-default">
             <div class="panel-body text-center">
-              <p>NOMBRE DE STAGIAIRE</p>
+              <p>NOMBRES DE STAGIAIRES</p>
               <h3>{{trainee|length}}</h3>
             </div>
           </div>

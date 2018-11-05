@@ -3,6 +3,11 @@
     border-radius : none;
 }
 
+.logo{
+    width:30px;
+height:25px;
+}
+
 .custom-combobox {
     position: relative;
     display: inline-block;
