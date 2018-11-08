@@ -10,29 +10,29 @@ class RegistrationForm(FlaskForm):
     """
     Form for users to create new account
     """
-    email = StringField('Mail', validators=[DataRequired(), Email()])
-    username = StringField('Nom utilisateur', validators=[DataRequired()])
-    first_name = StringField('Nom', validators=[DataRequired()])
-    last_name = StringField('Prénom', validators=[DataRequired()])
-    password = PasswordField('Mot de passe', validators=[
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    username = StringField('Username', validators=[DataRequired()])
+    first_name = StringField('First Name', validators=[DataRequired()])
+    last_name = StringField('Last Name', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[
                                         DataRequired(),
                                         EqualTo('confirm_password')
                                         ])
-    confirm_password = PasswordField('Confirmez le mot de passe')
-    submit = SubmitField('Enrégister')
+    confirm_password = PasswordField('Confirm Password')
+    submit = SubmitField('Register')
 
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
-            raise ValidationError('cet email est déjà utilisé.')
+            raise ValidationError('Email is already in use.')
 
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():
-            raise ValidationError('Nom d utilisateur est déjà utilisé.')
+            raise ValidationError('Username is already in use.')
 
 class LoginForm(FlaskForm):
     """
     Form for users to login
     """
-    email = StringField('Mail', validators=[DataRequired(), Email()])
-    password = PasswordField('Mot de pass', validators=[DataRequired()])
-    submit = SubmitField('S identifier')
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')

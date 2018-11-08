@@ -33,11 +33,11 @@
 
   <div class="actions-bar">
     <div class="btn-group" role="group" aria-label="...">
-        <a class="btn btn-default printDiv" href="#">Impression</a>
+        <a class="btn btn-default printDiv" href="#">Print</a>
     </div>
     <div class="btn-group" role="group" aria-label="...">
-        <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Importer données</a>
-        <a type="button" class="btn btn-default" href="{{ url_for('trainee.export_out') }}">Exporter données</a>
+        <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Import data</a>
+        <a type="button" class="btn btn-default" href="{{ url_for('trainee.export_out') }}">Export data</a>
     </div>
   </div>
   <div class="">
@@ -46,11 +46,17 @@
           <tr>
             <th width=""></th>
             <th width="15%"> Image </th>
+            <th width="15%"> Matricule </th>
             <th width="15%"> Nom </th>
             <th width="15%"> Prénom </th>
             <th width="15%"> Unité </th>
             <th width="15%"> Niveau </th>
             <th width="15%"> Actions </th>
+            <th width="15%">Début </th>
+            <th width="15%">Fin </th>
+            <th width="15%">Tuteur</th>
+            <th width="15%">Numero</th>
+            <th width="15%">Thème </th>
           </tr>
         </thead>
         <tbody>
@@ -62,6 +68,7 @@
                 <img src="{{item.image_url}}" style="width: 40px; height: 40px">
               {% endif %}
             </td>
+            <td> {{ item.registration_number }} </td>
             <td> {{ item.first_name }} </td>
             <td> {{ item.last_name }} </td>
             <td> {{ item.unit.name }} </td>
@@ -80,7 +87,7 @@
                   </li>
                   <li>
                     <a href="{{ url_for('trainee.delete', id=item.id) }}">
-                      <i class="fa fa-trash"></i> supprimer
+                      <i class="fa fa-trash"></i> Supprimer
                     </a>
                   </li>
                 </ul>
@@ -103,15 +110,15 @@
     <div class="trainee-card">
       <div class="trainee-card-head">
         <div class="trainee-card-head-logo">
-          <img src="" style="width: 40px; height: 30px">
+          <img src="{{ url_for('static', filename = 'img/logo.png') }}" style="width: 40px; height: 30px">
           <p style="height: 10px">STAGIAIRE</p>
+          <b class="reg_number">{{ item.registration_number }}</b>
         </div>
         <div class="trainee-card-head-avtr">
           <img src="{{item.image_url}}" style="width: 40px; height: 40px">
         </div>
       </div>
       <div class="trainee-card-body">
-        <b class="reg_number">{{ item.resgistration_number }}</b>
         <h3 class="full_name">{{ item.first_name + ' ' + item.last_name }}</h3>
         <ul>
           <li>Departement : <b>{{ item.unit.department.name }}</b></li>
@@ -135,11 +142,11 @@
       <div class="inner">
         <h1 style="text-align:center;">Stagiaires</h1>
         <div style="text-align: center">
-          <h3> Aucune donnée n'a été ajoutée </h3>
+          <h3>Aucune donnée n'a été ajoutée. </h3>
           <a href="{{ url_for('trainee.add') }}" class="btn btn-success">
             Ajouter stagiaire
           </a>
-          <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Importer données</a>
+          <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Import data</a>
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@
         {% endif %}
     </div>
     <div class="col-md-4">
-        <form action="" method="post" novalidate>
+        <form action="" enctype="multipart/form-data" method="post" novalidate>
             {{ form.hidden_tag() }}
             {{ form.registration_number(class_="form-control") }}
             {% for error in form.registration_number.errors %}

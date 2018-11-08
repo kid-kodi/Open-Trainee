@@ -11,7 +11,7 @@
         <br/>
         {{ utils.flashed_messages() }}
         <br/>
-        <h1 style="text-align:center;">Filière</h1>
+        <h1 style="text-align:center;">FILIÉRES</h1>
         {% if list %}
           <hr class="intro-divider">
           <div class="center">
@@ -20,8 +20,8 @@
                 <tr>
                   <th width="15%"> Nom </th>
                   <th width="40%"> Description </th>
-                  <th width="15%"> MODIFIER </th>
-                  <th width="15%"> Supprimer </th>
+                  <th width="15%"> Modifier </th>
+                  <th width="15%"> Spprimer </th>
                 </tr>
               </thead>
               <tbody>
@@ -47,12 +47,12 @@
           <div style="text-align: center">
         {% else %}
           <div style="text-align: center">
-            <h3> Aucune donnée n'a été ajoutée. </h3>
+            <h3>Aucune donnée n'a été ajoutée. </h3>
             <hr class="intro-divider">
         {% endif %}
           <a href="{{ url_for('spinneret.add') }}" class="btn btn-default btn-lg">
             <i class="fa fa-plus"></i>
-            Ajouter filières
+            Ajouter filière
           </a>
         </div>
       </div>

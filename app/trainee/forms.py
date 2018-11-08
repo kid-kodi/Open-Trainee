@@ -7,33 +7,33 @@ from wtforms.validators import DataRequired, Email
 from app import images
 
 class SearchForm(FlaskForm):
-    first_name = StringField('Nom')
-    last_name = StringField('Prénom')
-    unit_id = SelectField('Unité de recherche', choices=[], coerce=int)
-    submit = SubmitField('Chercher')
+    first_name = StringField('first name')
+    last_name = StringField('last name')
+    unit_id = SelectField('Search unit', choices=[], coerce=int)
+    submit = SubmitField('Search')
 
 class TraineeForm(FlaskForm):
     """
     Form for departement to add or edit a trainee
     """
-    image = FileField('Image', validators=[FileAllowed(images, 'Images only')])
+    image = FileField('Image', validators=[FileAllowed(images, 'Images seulement')])
     registration_number = HiddenField(validators=[DataRequired()])
     first_name = StringField('Nom', validators=[DataRequired()])
-    last_name = StringField('Prénom', validators=[DataRequired()])
-    email = StringField('Mail', validators=[DataRequired(), Email()])
-    phone = StringField('Numéro', validators=[DataRequired()])
+    last_name = StringField('Prénoms', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    phone = StringField('Téléphone', validators=[DataRequired()])
     birthdate = StringField('Date de naissance', validators=[DataRequired()])
 
-    school = StringField('Ecole', validators=[DataRequired()])
-    diplome = StringField('Diplome', validators=[DataRequired()])
+    school = StringField('Etablissement', validators=[DataRequired()])
+    diplome = StringField('Diplôme Obtenu', validators=[DataRequired()])
     spinneret_id = SelectField(choices=[], coerce=int, label="Filière")
-    level_id = SelectField(choices=[], coerce=int, label="Niveau")
+    level_id = SelectField(choices=[], coerce=int, label="Niveau d'étude")
 
     unit_id = SelectField(choices=[], coerce=int, label="Unité")
     responsable = StringField('Responsable')
-    started_date = StringField('Date de debut')
-    ended_date = StringField('Date de fin')
-    apply_date = StringField('date application')
+    started_date = StringField('Date de début de stage')
+    ended_date = StringField('Date de fin de stage')
     theme = StringField('Thème')
+    apply_date = StringField('Date de soutenance')
 
-    submit = SubmitField('Soumettre')
+    submit = SubmitField('Enregistrer')

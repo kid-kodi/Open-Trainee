@@ -8,6 +8,6 @@ class LevelForm(FlaskForm):
     """
     Form for departement to add or edit a unit
     """
-    name = StringField('Nom', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
-    submit = SubmitField('Sauver')
+    submit = SubmitField('Submit')

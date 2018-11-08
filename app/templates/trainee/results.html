@@ -9,7 +9,7 @@
 {% if list %}
 <div>
   <div class="page-header">
-    <h1>Stagiaire</h1>
+    <h1>Trainees</h1>
     <div class="">
       <a href="{{ url_for('trainee.add') }}" class="btn btn-success">
         Ajouter stagiaire
@@ -19,12 +19,12 @@
 
   <div class="actions-bar">
     <div class="btn-group" role="group" aria-label="...">
-        <a class="btn btn-default printDiv" href="#">Impression</a>
+        <a class="btn btn-default printDiv" href="#">Print</a>
         <a class="btn btn-default printBtn" href="#">PDF</a>
     </div>
     <div class="btn-group" role="group" aria-label="...">
-        <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Importer des données</a>
-        <a type="button" class="btn btn-default" href="{{ url_for('trainee.export_out') }}">Exporter des données</a>
+        <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Import data</a>
+        <a type="button" class="btn btn-default" href="{{ url_for('trainee.export_out') }}">Export data</a>
     </div>
   </div>
   <div class="">
@@ -67,7 +67,7 @@
                   </li>
                   <li>
                     <a href="{{ url_for('trainee.delete', id=item.id) }}">
-                      <i class="fa fa-trash"></i> Supprimer
+                      <i class="fa fa-trash"></i> Suprimer
                     </a>
                   </li>
                 </ul>
@@ -113,13 +113,13 @@
   <div class="outer">
     <div class="middle">
       <div class="inner">
-        <h1 style="text-align:center;">Stagiaires</h1>
+        <h1 style="text-align:center;">Trainees</h1>
         <div style="text-align: center">
-          <h3> Aucune donnée n'a été ajoutée. </h3>
+          <h3> No data have been added. </h3>
           <a href="{{ url_for('trainee.add') }}" class="btn btn-success">
             Ajouter stagiaire
           </a>
-          <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Importer données</a>
+          <a type="button" class="btn btn-default" href="{{ url_for('trainee.import_in') }}">Import data</a>
         </div>
       </div>
     </div>

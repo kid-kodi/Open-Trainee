@@ -18,11 +18,11 @@
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th width="15%"> Nom du departement </th>
+                  <th width="15%"> Nom </th>
                   <th width="40%"> Description </th>
                   <th width="15%"> Nombre d'employés </th>
                   <th width="15%"> Modifier </th>
-                  <th width="15%"> Supprimer </th>
+                  <th width="15%"> Supprimer</th>
                 </tr>
               </thead>
               <tbody>
@@ -39,12 +39,12 @@
                   </td>
                   <td>
                     <a href="{{ url_for('department.edit', id=item.id) }}">
-                      <i class="fa fa-pencil"></i> Modifier 
+                      <i class="fa fa-pencil"></i> Modifier
                     </a>
                   </td>
                   <td>
                     <a href="{{ url_for('department.delete', id=item.id) }}">
-                      <i class="fa fa-trash"></i> Supprimer 
+                      <i class="fa fa-trash"></i> Supprimer
                     </a>
                   </td>
                 </tr>
@@ -55,7 +55,7 @@
           <div style="text-align: center">
         {% else %}
           <div style="text-align: center">
-            <h3> Aucune donnée n'a été ajoutée.</h3>
+            <h3>Aucune donnée n'a été ajoutée. </h3>
             <hr class="intro-divider">
         {% endif %}
           <a href="{{ url_for('department.add') }}" class="btn btn-default btn-lg">

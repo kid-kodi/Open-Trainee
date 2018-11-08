@@ -20,7 +20,7 @@
                 <tr>
                   <th width="15%"> Nom </th>
                   <th width="15%"> Prénom </th>
-                  <th width="15%"> Mail </th>
+                  <th width="15%"> Email </th>
                   <th width="15%"> Modifier </th>
                   <th width="15%"> Supprimer </th>
                 </tr>
@@ -38,7 +38,7 @@
                   </td>
                   <td>
                     <a href="{{ url_for('user.delete', id=item.id) }}">
-                      <i class="fa fa-trash"></i>Supprimer 
+                      <i class="fa fa-trash"></i> Supprimer 
                     </a>
                   </td>
                 </tr>
@@ -49,7 +49,7 @@
           <div style="text-align: center">
         {% else %}
           <div style="text-align: center">
-            <h3>Aucune donnée n'a été ajoutée. </h3>
+            <h3> Aucune donnée n'a été ajoutée. </h3>
             <hr class="intro-divider">
         {% endif %}
           <a href="{{ url_for('user.add') }}" class="btn btn-default btn-lg">
