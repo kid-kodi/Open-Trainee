@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+	<h1>{{purchase.display_as}}</h1>
+	<a class="btn btn-default" href="{{url_for('purchase.edit', id=purchase.id)}}">Modifier</a>
+	<div>
+		<h3>Information générale</h3>
+		<table class="table">
+			<tr>
+				<td>Nom du fourniseur</td>
+				<td>{{purchase.display_as}}</td>
+			</tr>
+			<tr>
+				<td>Adresse</td>
+				<td>{{purchase.phone}}</td>
+			</tr>
+			<tr>
+				<td>Statut</td>
+				<td>{{purchase.status}}</td>
+			</tr>
+		</table>
+	</div>
+{% endblock %}

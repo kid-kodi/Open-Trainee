@@ -53,6 +53,23 @@ def create_app(config_name=Config):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
+    from .supplier import bp as supplier_blueprint
+    app.register_blueprint(supplier_blueprint)
+
+    from .item import bp as item_blueprint
+    app.register_blueprint(item_blueprint) 
+
+
+    from .customer import bp as customer_blueprint
+    app.register_blueprint(customer_blueprint)
+
+    from .order import bp as order_blueprint
+    app.register_blueprint(order_blueprint)
+
+    from .purchase import bp as purchase_blueprint
+    app.register_blueprint(purchase_blueprint)
+
+
     from .home import home as home_blueprint
     app.register_blueprint(home_blueprint)
 

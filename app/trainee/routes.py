@@ -73,7 +73,6 @@ def add():
     add = True
 
     form = TraineeForm()
-    form.registration_number.data = "#"
     form.level_id.choices = [(lvl.id, lvl.name) for lvl in Level.query.all()]
     form.spinneret_id.choices = [(sp.id, sp.name) for sp in Spinneret.query.all()]
     form.unit_id.choices = [(u.id, u.name) for u in Unit.query.all()]

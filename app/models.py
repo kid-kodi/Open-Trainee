@@ -24,7 +24,7 @@ class User(UserMixin, db.Model):
     last_name = db.Column(db.String(60), index=True)
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
-    trainees = db.relationship('Trainee', backref='owner')
+    suppliers = db.relationship('Supplier', backref='user')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     avatar = db.Column(db.String, default=None, nullable=True)
@@ -106,6 +106,62 @@ class Spinneret(db.Model):
         return '<Spinneret: {}>'.format(self.name)
 
 
+
+class Customer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'))
+    phone = db.Column(db.String(255))
+    email = db.Column(db.String(255))
+    status = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime(), default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return '<Customer: {}>'.format(self.display_as)
+
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    display_as = db.Column(db.String(255), unique=True)
+    phone = db.Column(db.String(255))
+    status = db.Column(db.Integer)
+    customers = db.relationship('Customer', backref='order')
+    created_at = db.Column(db.DateTime(), default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return '<Order: {}>'.format(self.display_as)
+
+class Purchase(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.id'))
+    adress = db.Column(db.String(255), unique=True)
+    phone = db.Column(db.String(255))
+    status = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime(), default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return '<Purchase: {}>'.format(self.display_as)
+
+
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    category_id = db.Column(db.Integer)
+    name = db.Column(db.String(255), unique=True)
+    description = db.Column(db.String(255))
+    selling_price = db.Column(db.Integer)
+    buying_price = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
+    status = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime(), default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return '<Item: {}>'.format(self.name)
+
+
+
+
 class Level(db.Model):
     """
     Create a Department table
@@ -120,6 +176,20 @@ class Level(db.Model):
 
     def __repr__(self):
         return '<Level: {}>'.format(self.name)
+
+
+class Supplier(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    display_as=db.Column(db.String(255), unique=True)
+    phone = db.Column(db.String(255), unique=True)
+    email = db.Column(db.String(255))
+    status = db.Column(db.Integer)
+    purchases = db.relationship('Purchase', backref='supplier')
+    created_at =db.Column(db.DateTime(), default= datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return '<Supplier: {}>'.format(self.name)
 
 
 class Trainee(db.Model):

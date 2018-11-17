@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+	<h1>Vente</h1>
+	<a class="btn btn-success" href="{{url_for('order.add')}}">Nouvelle vente</a>
+	<div>
+		{% if list | length > 0%}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom du client</th>
+					<th>Téléphone</th>
+					<th>statut</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i in list %}
+				<tr>
+					<td>{{i.display_as}}</td>
+					<td>{{i.phone}}</td>
+					<td>{{i.status}}</td>
+					<td>
+						<a class="btn btn-default" href="{{url_for('order.edit', id=i.id)}}">Modifier</a>
+						<a class="btn btn-default" href="{{url_for('order.detail', id=i.id)}}">Détails</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+			<h3>Pas de vent enregistrés</h3>
+		{% endif %}
+	</div>
+{% endblock %}

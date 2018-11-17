@@ -16,7 +16,6 @@ class TraineeForm(FlaskForm):
     """
     Form for departement to add or edit a trainee
     """
-    image = FileField('Image', validators=[FileAllowed(images, 'Images seulement')])
     registration_number = HiddenField(validators=[DataRequired()])
     first_name = StringField('Nom', validators=[DataRequired()])
     last_name = StringField('Prénoms', validators=[DataRequired()])

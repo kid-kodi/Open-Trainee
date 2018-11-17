@@ -30,10 +30,6 @@
             {% for error in form.registration_number.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-            {{ form.image(class_="form-control") }}
-            {% for error in form.image.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
 
             <p>
                 {{ form.first_name.label }}

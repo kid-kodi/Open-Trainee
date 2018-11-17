@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+	<h1>{{order.display_as}}</h1>
+	<a class="btn btn-default" href="{{url_for('order.edit', id=order.id)}}">Modifier</a>
+	<div>
+		<h3>Information générale</h3>
+		<table class="table">
+			<tr>
+				<td>Nom du client</td>
+				<td>{{order.display_as}}</td>
+			</tr>
+			<tr>
+				<td>Téléphone</td>
+				<td>{{order.phone}}</td>
+			</tr>
+			<tr>
+				<td>Statut</td>
+				<td>{{order.status}}</td>
+			</tr>
+		</table>
+	</div>
+{% endblock %}

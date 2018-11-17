@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{ title }} | Open-Trainee</title>
+    <title>{{ title }} | MANAGER</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
@@ -37,16 +37,24 @@
               {% endif %}
               <ul class="nav navbar-nav">
                   <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
-                  <li><a href="{{ url_for('trainee.list') }}">Trainees</a></li>
+                  <li><a href="{{ url_for('supplier.index') }}">Fournisseur</a></li>
+                  <li><a href="{{ url_for('purchase.index') }}">Achat</a></li>
+                   <li><a href="{{ url_for('customer.index') }}">Clients</a></li>
+                   <li><a href="{{ url_for('order.index') }}">Vente</a></li>
+                   <li><a href="{{ url_for('item.index') }}">Produits / Services</a></li>
                   <!-- Split button -->
                   <li role="presentation" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="fa fa-plus"></i>
                       <span class="caret"></span> </a>
                     <ul class="dropdown-menu">
-                      <li><a href="{{ url_for('trainee.add') }}">Nouveau stagiaire</a></li>
-                      <li><a href="{{ url_for('trainee.export_out') }}">Exporter la liste des stagiaire</a></li>
-                      <li><a href="{{ url_for('trainee.import_in') }}">Importer une liste de staigaire</a></li>
+                      <li><a href="{{ url_for('supplier.index') }}">Fournisseur</a></li>
+                       <li><a href="{{ url_for('customer.index') }}">Clients</a></li>
+                       <li><a href="{{ url_for('purchase.index') }}">Achat</a></li>
+                      <li><a href="{{ url_for('order.index') }}">Vente</a></li>
+                      <li><a href="{{ url_for('supplier.add') }}">Produits/Services</a></li>
+                      <li><a href="{{ url_for('trainee.export_out') }}">Exporter la liste des Produits/Services</a></li>
+                      <li><a href="{{ url_for('trainee.import_in') }}">Importer la liste des Produits/Services</a></li>
                     </ul>
                   </li>
               </ul>
@@ -62,13 +70,13 @@
                           <i class="fa fa-cog"></i>
                           <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
-                          <li><a href="{{ url_for('department.list') }}">Departements</a></li>
+                         <!--  <li><a href="{{ url_for('department.list') }}">Departements</a></li>
                           <li><a href="{{ url_for('unit.list') }}">Unités</a></li>
                           <li><a href="{{ url_for('role.list') }}">Roles</a></li>
                           <li><a href="{{ url_for('user.list') }}">Utilisateurs</a></li>
                           <li><a href="{{ url_for('level.list') }}">Niveaux</a></li>
                           <li><a href="{{ url_for('spinneret.list') }}">Filières</a></li>
-                          <li role="separator" class="divider"></li>
+                          <li role="separator" class="divider"></li> -->
                           <li><a href="{{ url_for('home.setup') }}">Configuration</a></li>
                         </ul>
                       </li>
