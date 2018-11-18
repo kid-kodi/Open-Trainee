@@ -24,7 +24,7 @@ def add():
     form = SupplierForm()
     if form.validate_on_submit():
         supplier = Supplier(
-            display_as=form.display_as.data, 
+            supplier_id=form.fournisseur.data,  
             phone=form.phone.data,
             email=form.email.data,
             status=1,

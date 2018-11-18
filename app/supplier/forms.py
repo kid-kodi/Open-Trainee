@@ -3,6 +3,6 @@ from wtforms import StringField, SelectField, SubmitField
 from wtforms.validators import DataRequired
 
 class SupplierForm(FlaskForm):
-    display_as = StringField('Raison sociale', validators=[DataRequired()])
+    fournisseur = SelectField('Selectionner un Fournisseur', coerce=int, choices=[(1, ''), (2, '')])
     phone = StringField('Téléphone', validators=[DataRequired()])
     submit = SubmitField('Enregistrer')
